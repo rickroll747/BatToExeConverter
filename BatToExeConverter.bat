@@ -3,6 +3,7 @@ setlocal
 
 :: Get the current script's directory
 set "currentDir=%~dp0"
+
 :: Display the Banner
 call :banner
 
@@ -11,6 +12,7 @@ if not exist "%currentDir%BatToExeConverter.bat" (
     echo Bat To Exe Converter not found in the same directory as this script.
     echo Please make sure BatToExeConverter.bat is in the same folder as this script.
     pause > nul
+    exit /b
 )
 
 :: Prompt user for the .bat file to convert
@@ -21,6 +23,7 @@ set /p "batFile=Enter path to your .bat file: "
 if not exist "%batFile%" (
     echo The specified file does not exist. Please check the path.
     pause > nul
+    exit /b
 )
 
 :: Prepare output EXE file path
@@ -32,9 +35,9 @@ start "" "%currentDir%BatToExeConverter.bat" "%batFile%"
 echo Conversion window opened. Please configure and convert your .bat file.
 pause > nul
 endlocal
+goto :eof
 
 :banner
-
 echo ██████╗ █████╗████████████████╗██████╗█████████╗  █████████╗
 echo ██╔══████╔══██╚══██╔══╚══██╔══██╔═══████╔════╚██╗██╔██╔════╝
 echo ██████╔███████║  ██║     ██║  ██║   ███████╗  ╚███╔╝█████╗  
@@ -42,3 +45,4 @@ echo ██╔══████╔══██║  ██║     ██║  █
 echo ██████╔██║  ██║  ██║     ██║  ╚██████╔█████████╔╝ █████████╗
 echo ╚═════╝╚═╝  ╚═╝  ╚═╝     ╚═╝   ╚═════╝╚══════╚═╝  ╚═╚══════╝
 echo.
+goto :eof
